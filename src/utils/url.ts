@@ -1,0 +1,1 @@
+export const baseUrl: string ="https://nt-devconnector.onrender.com/api/"

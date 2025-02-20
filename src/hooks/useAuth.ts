@@ -2,12 +2,14 @@
 import { User } from '@/interface/User';
 import { baseUrl } from '@/utils/url';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 function useAuth() {
     const [user, setUser] = useState<User | null>(null)
     const [error, setError] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false)
+    const router = useRouter()
     async function getMe() {
         try {
             // setLoading(true)
@@ -35,6 +37,10 @@ function useAuth() {
                     'Content-Type': 'application/json'
                 }
             })
+            if (res.status === 200) {
+                router.push("/dashboard")
+                localStorage.setItem ("token",res.data.token)
+            }
             console.log(res);
         } catch (error:any) {
             setError(error.message)

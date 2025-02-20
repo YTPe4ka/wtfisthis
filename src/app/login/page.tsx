@@ -1,15 +1,21 @@
 "use client"
 import useAuth from '@/hooks/useAuth'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 function Login() {
     const {login,logOut,user,error,loading} = useAuth() 
     const [email,setEmail] = useState<string>("")
     const [password,setPassword] = useState<string>("")
+      let router = useRouter();
+      if (localStorage.getItem("token")) {
+        router.push("/dashboard")
+      }
     const onSubmit = async (e:React.FormEvent) => {
         e.preventDefault();
      await login(email,password)
     }
+    
     // if (loading) {
     //     return <h1>gay</h1>
     // }

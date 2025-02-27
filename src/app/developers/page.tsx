@@ -48,14 +48,14 @@ function page() {
                     <i className="text-lg">{developer.location}</i>
                   )}
                   <button className="w-[140px] py-2 bg-[#0f3352] text-white rounded-md ">
-                    <Link href={`/developers/${developer._id}`}>
+                    <Link href={`/profile/${developer.user._id}`}>
                       View Profile
                     </Link>
                   </button>
                 </div>
               </div>
               <div className="py-6">
-                {developer.skills.map((skill, index) => (
+                {developer.skills.map((skill:any, index:any) => (
                   <p
                     key={index}
                     className="text-[#17a2b8] text-lg flex items-center gap-3"

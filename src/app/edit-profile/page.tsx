@@ -1,7 +1,7 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import useFetch from '@/hooks/useFetch'
-import { User } from '@/interface/User'
+'use client';
+import React, { useEffect, useState } from 'react';
+import useFetch from '@/hooks/useFetch';
+import { User } from '@/interface/User';
 import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Login from '../login/page';
@@ -12,34 +12,36 @@ function EditProfile() {
   const { me } = useParams();
   const [AboutMe, setAboutMe] = useState<null>(null);
   const [social, setSocial] = useState<null>(null);
-  const [skills, setSkills] = useState<string[] | undefined>([]);
-  const [status, setStatus] = useState<string | undefined>("");
-  const [bio, setBio] = useState<string | undefined>("");
-  const [company, setCompany] = useState<string | undefined>("");
-  const [website, setWebsite] = useState<string | undefined>(""); //website
-  const [githubusername, setGithubusername] = useState<string | undefined>("");
-  const [location, setLocation] = useState<string | undefined>("");
-  const [useless, setUseless] = useState<string | undefined>("");
-  const { data, loading, error } = useFetch<User>('profile/me')
-  useEffect(()=>{
-    setCompany(data?.company)
-    setBio(data?.bio ?? "")
-    setStatus(data?.status)
-    setSkills(data?.skills)
-    setWebsite(data?.website ?? "")
-    setGithubusername(data?.githubusername ?? "")
-    setLocation(data?.location ?? "")
-  },[loading])
-  console.log(data?.company);
+  const [skills, setSkills] = useState<string >("");
+  const [status, setStatus] = useState<string>('');
+  const [bio, setBio] = useState<string>('');
+  const [company, setCompany] = useState<string>('');
+  const [website, setWebsite] = useState<string>(''); //website
+  const [githubusername, setGithubusername] = useState<string>('');
+  const [location, setLocation] = useState<string>('');
+  const [useless, setUseless] = useState<string>('');
+  const { data, error,loading:loadings } = useFetch<User>('profile/me');
+  const { EditMyAss, data: datas, loading } = useEdit('profile');
+  console.log(loadings,"Sdssdssssssss");
+ useEffect(() => {
+  console.log(data,"ddddddddddddddddddddddddddddddddddddddddddddd  s");
   
-  const { EditMyAss,data:datas } = useEdit("profile")
+  // if (data) {
+    setCompany(data?.company || '');
+    setBio(data?.bio || '');
+    setStatus(data?.status || '');
+    setSkills(data?.skills || '');
+    setWebsite(data?.website || '');
+    setGithubusername(data?.githubusername || '');
+    setLocation(data?.location || '');
+  // }
+}, [loadings]);
   // console.log(datas);
-  
-const onSubmit = async (e:React.FormEvent) => {
-        e.preventDefault();
-        EditMyAss(skills,status,bio,company,website,githubusername,location,)
-      }
 
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    EditMyAss(skills, status, bio, company, website, githubusername, location);
+  };
 
   return (
     <div className="flex flex-col gap-3 items-center">
@@ -54,7 +56,7 @@ const onSubmit = async (e:React.FormEvent) => {
         <select
           id="person"
           name="person"
-          value={data?.status || ""}
+          value={status}
           onChange={(e) => setStatus(e.target.value)}
         >
           <option value="* Select Professional Status">
@@ -86,7 +88,7 @@ const onSubmit = async (e:React.FormEvent) => {
           type="text "
           placeholder="Website"
           name="website"
-          value={data?.website || ""}
+          value={website}
           onChange={(e) => setWebsite(e.target.value)}
         />
         <p className="opacity-50">Could be your own or a company website</p>
@@ -94,7 +96,7 @@ const onSubmit = async (e:React.FormEvent) => {
           type="text "
           placeholder="Location"
           name="location"
-          value={data?.location || ""}
+          value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
         <p className="opacity-50">
@@ -104,8 +106,8 @@ const onSubmit = async (e:React.FormEvent) => {
           type="text "
           placeholder="*Skills"
           name="skills"
-          value={data?.skills || ""}
-          onChange={(e) => setSkills([e.target.value])}
+          value={skills}
+          onChange={(e) => setSkills(e.target.value)}
         />
         <p className="opacity-50">
           Please use comma separated values {`(eg. HTML,CSS,JavaScript,PHP)`}
@@ -114,7 +116,7 @@ const onSubmit = async (e:React.FormEvent) => {
           type="text "
           placeholder="GitHub Username"
           name="githubusername"
-          value={data?.githubusername || ""}
+          value={githubusername}
           onChange={(e) => setGithubusername(e.target.value)}
         />
         <p className="opacity-50">
@@ -123,21 +125,41 @@ const onSubmit = async (e:React.FormEvent) => {
         <textarea
           placeholder="Write A short bio about ur self"
           name="bio"
-          value={data?.bio || ""}
-          onChange={(e:any) => setBio(e.target.value)}
+          value={bio}
+          onChange={(e: any) => setBio(e.target.value)}
         ></textarea>
         <p className="opacity-50">Tell us a little about yourself</p>
         <h1>Add about ur self</h1>
-        <input type="text" placeholder="Twitter URl"  onChange={(e) => setUseless(e.target.value)}/>
-        <input type="text" placeholder="Facebook URl" onChange={(e) => setUseless(e.target.value)}/>
-        <input type="text" placeholder="YouTube URl" onChange={(e) => setUseless(e.target.value)}/>
-        <input type="text" placeholder="Linkedin URl" onChange={(e) => setUseless(e.target.value)}/>
-        <input type="text" placeholder="Instagram URl" onChange={(e) => setUseless(e.target.value)}/>
+        <input
+          type="text"
+          placeholder="Twitter URl"
+          onChange={(e) => setUseless(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Facebook URl"
+          onChange={(e) => setUseless(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="YouTube URl"
+          onChange={(e) => setUseless(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Linkedin URl"
+          onChange={(e) => setUseless(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Instagram URl"
+          onChange={(e) => setUseless(e.target.value)}
+        />
 
         <button type="submit">submit</button>
       </form>
     </div>
-  )
+  );
 }
 
-export default EditProfile
+export default EditProfile;

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname,useRouter} from "next/navigation";
 
 function Navbar() {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   const pathname = usePathname();
   const router = useRouter();
 
@@ -45,8 +45,8 @@ function Navbar() {
         ) : (
           <div className="flex gap-3">
               <Link
-                className={`${pathname === "/posts" ? "active" : ""}`}
-                href={"/posts"}
+                className={`${pathname === "/post" ? "active" : ""}`}
+                href={"/post"}
               >
                 Posts
               </Link>

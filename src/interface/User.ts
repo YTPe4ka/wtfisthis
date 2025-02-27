@@ -11,7 +11,7 @@ export interface User{
         _id:string;
         avatar:string   | undefined;
     };
-    skills:string[] ;
+    skills:string ;
     social?:{
         facebook:string;
         instagram:string;

@@ -27,13 +27,24 @@ function useFetch<T>(url: string) {
         },
       });
       setData(res.data);
+      setProfiles(res.data);
+      setPosts(res.data);
+      setLoading(false);
+      setUser(res.data);
+      console.log(res.data)
+
       if (res.status === 400) {
-      SetStatusOfUser(true)
+      SetStatusOfUser(false)
+      console.log();
+      
       }
 
     } catch (error: any) {
       setError(error.message);
       setLoading(false);
+      console.log(error);
+      SetStatusOfUser(false)
+      
     } finally {
       setLoading(false);
     }
@@ -43,9 +54,9 @@ function useFetch<T>(url: string) {
 
   useEffect(() => {
     getMe();
-    GetProfiles();
-    userGet();
-    postGet();
+    // GetProfiles();
+    // userGet();
+    // postGet();
   }, [url]);
 
   //////////////////////////////////////////////////////////////////////////// this is to getting profiles in developers
@@ -71,41 +82,41 @@ function useFetch<T>(url: string) {
 
   ////////////////////////////////////////////////////////////////////////////  thi is to getting profiles in developers
 
-  async function userGet() {
-    try {
-      setError('');
-      setLoading(true);
-      let res = await axios.get(baseUrl + url, {
-        headers: {
-          'x-auth-token': `${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      setUser(res.data);
-    } catch (error: any) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+  // async function userGet() {
+  //   try {
+  //     setError('');
+  //     setLoading(true);
+  //     let res = await axios.get(baseUrl + url, {
+  //       headers: {
+  //         'x-auth-token': `${localStorage.getItem('token')}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+  //     setUser(res.data);
+  //   } catch (error: any) {
+  //     setError(error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
   //////////////////////////////////////////////////////////////////////////// this to getting profiles in
-  async function postGet() {
-    try {
-      setError('');
-      setLoading(true);
-      let res = await axios.get(baseUrl + url, {
-        headers: {
-          'x-auth-token': `${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      setPosts(res.data);
-    } catch (error: any) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+  // async function postGet() {
+  //   try {
+  //     setError('');
+  //     setLoading(true);
+  //     let res = await axios.get(baseUrl + url, {
+  //       headers: {
+  //         'x-auth-token': `${localStorage.getItem('token')}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+  //     setPosts(res.data);
+  //   } catch (error: any) {
+  //     setError(error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   //////////////////////////////////////////////////////////////////////////// this is problem function like in posts
 
@@ -174,7 +185,7 @@ function useFetch<T>(url: string) {
     }
   }
   //////////////////////////////////////////////////////////////////////////// there we export all functions and datas
-  return { loading, error, data, Profiles, user, posts, Like, statusofLike,UnLike,PostComment,statusofuser};
+  return { loading, error, data, Profiles, user, posts, Like, statusofLike,UnLike,PostComment,statusofuser,SetStatusOfUser};
 }
 
 export default useFetch;

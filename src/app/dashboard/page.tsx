@@ -8,40 +8,45 @@ function Dashboard() {
   const { data, loading, error, statusofuser } = useFetch<User>('profile/me');
   console.log(data);
   let router = useRouter();
+
   if (!localStorage.getItem('token')) {
     router.push('/login');
   }
-  return (
-    <div>
-      {statusofuser ? (
-        <div className="col">
-          <h1 className="text-blue-600 text-xl flex">Dashboard</h1>
-          <h1 className="text-blue-600 text-xl flex">
-            welcome {data?.user.name}
-          </h1>
-          <button
-            className="text-blue-600 text-xl flex"
-            onClick={() => router.push('/edit-profile')}
-          >
-            Edit Proifle
-          </button>
-        </div>
-      ) : (
+  console.log(statusofuser);
+  
 
-        <div className="col">
-        <h1 className="text-blue-600 text-xl flex">Dashboard</h1>
-        <h1 className="text-blue-600 text-xl flex">
-          welcome Ghost
-        </h1>
-        <p className="opacity-50" >Keep in mind WithOut Creating Profile Others cant See Ur Profile</p>
-        <button
-          className="text-blue-600 text-xl flex"
-          onClick={() => router.push('/create-profile')}
-        >
-          Create account
-        </button>
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-md p-6 rounded-lg w-96 text-center">
+        <h1 className="text-2xl font-bold text-blue-600 mb-4">Dashboard</h1>
+
+        {statusofuser ? (
+          <>
+            <h1 className="text-lg font-semibold text-gray-800">
+              Welcome, {data?.user.name}
+            </h1>
+            <button
+              className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+              onClick={() => router.push('/edit-profile')}
+            >
+              Edit Profile
+            </button>
+          </>
+        ) : (
+          <>
+            <h1 className="text-lg font-semibold text-gray-800">Welcome, Ghost</h1>
+            <p className="text-sm text-gray-500 mt-2">
+              Keep in mind: Without creating a profile, others can't see your profile.
+            </p>
+            <button
+              className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+              onClick={() => router.push('/create-profile')}
+            >
+              Create Account
+            </button>
+          </>
+        )}
       </div>
-      )}
     </div>
   );
 }

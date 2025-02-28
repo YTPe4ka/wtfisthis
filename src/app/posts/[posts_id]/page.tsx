@@ -1,73 +1,95 @@
 'use client';
 import useFetch from '@/hooks/useFetch';
 import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Posts } from './../../../interface/PostsID';
 import Link from 'next/link';
 import useAuth from '@/hooks/useAuth';
 import { User } from '@/interface/User';
+import useFunction from '@/hooks/useFunction';
 
-function userByID() {
+function UserByID() {
   const { posts_id } = useParams();
-  const { userinlogin } = useAuth()
-  const { loading, error, data, Profiles, user, statusofLike,  } =
+  const { userinlogin } = useAuth();
+  const { loading, error, data, Profiles, user, statusofLike } =
     useFetch<Posts>(`posts/${posts_id}`);
-    const { Like } = useFetch<Posts>(`posts/like/${posts_id}`);
-    const { UnLike } = useFetch<Posts>(`posts/unlike/${posts_id}`);
-    const { PostComment } = useFetch<Posts>(`posts/comment/${posts_id}`);
-    const [text, setText] = useState<string>('');
-  console.log(userinlogin,"фывфывфыв");
-  
+  const { data: datas, loading: wtfisthis, error: uzbeksila, statusofuser } =
+    useFetch<User>('profile/me');
+
+  const { Like } = useFunction<Posts>(`posts/like/${posts_id}`);
+  const { UnLike } = useFunction<Posts>(`posts/unlike/${posts_id}`);
+  const { PostComment } = useFunction<Posts>(`posts/comment/${posts_id}`);
+  const [text, setText] = useState<string>('');
+
+  console.log(userinlogin, 'фывфывфыв');
   console.log(user);
   console.log(posts_id);
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     PostComment(text);
   };
-  return (
-    <div className="max-w-xl mx-auto p-4">
-      <div className="col bg-white shadow-md p-4 rounded-lg">
-        <button className="w-[140px] py-2 bg-[#0f3352] text-white rounded-md ">
-          <Link href={`/posts`}>Back to Posts</Link>
-        </button>
-        <h1 className="text-blue-600 text-xl font-bold mb-4">Comments</h1>
-        <img
-          src={user?.avatar}
-          alt={user?.name}
-          className="w-24 h-24 rounded-full border mb-3"
-        />
-        <h1 className="text-lg font-semibold">Developer: {user?.name ?? ''}</h1>
-        <h1 className="text-gray-600">Comment: {user?.text ?? ''}</h1>
-        <h1 className="text-gray-500 text-sm">Date: {user?.date ?? ''}</h1>
-        <button
-          onClick={() => Like()}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md mt-3"
-        >
-          {user?.likes.length || ''} 👍
-        </button>
-        <button
-          onClick={() => UnLike()}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md mt-3 ml-5"
-        >
-          👎
-        </button>
 
-        <h1>leave a comment </h1>
-        <form action="" onSubmit={onSubmit}>
+  return (
+    <div className="max-w-2xl mx-auto p-6">
+      <div className="bg-white shadow-lg p-6 rounded-lg">
+        <button className="w-[140px] py-2 bg-[#0f3352] text-white rounded-md mb-4">
+          <Link href={`/post`}>Back to Posts</Link>
+        </button>
+        <h1 className="text-blue-600 text-2xl font-bold mb-4">Comments</h1>
+        <div className="flex items-center mb-4">
+          <img
+            src={user?.avatar}
+            alt={user?.name}
+            className="w-16 h-16 rounded-full border"
+          />
+          <div className="ml-4">
+            <h1 className="text-lg font-semibold">{user?.name ?? 'Unknown'}</h1>
+            <p className="text-gray-600">{user?.text ?? 'No comment'}</p>
+            <p className="text-gray-500 text-sm">{user?.date ?? 'Unknown date'}</p>
+          </div>
+        </div>
+        <div className="flex space-x-4 mb-4">
+          <button
+            onClick={() => Like()}
+            className="bg-blue-600 text-white px-4 py-2 rounded-md"
+          >
+            👍 {user?.likes.length || 0}
+          </button>
+          <button
+            onClick={() => UnLike()}
+            className="bg-red-600 text-white px-4 py-2 rounded-md"
+          >
+            👎
+          </button>
+        </div>
+        <h1 className="text-lg font-semibold mb-2">Leave a comment</h1>
+        <form onSubmit={onSubmit} className="mb-6">
           <input
             type="text"
             onChange={(e) => setText(e.target.value)}
-            placeholder="Input ur comment"
+            placeholder="Input your comment"
+            className="w-full p-2 border rounded-md"
           />
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md mt-3 ml-5">Submit</button>
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-md mt-3">
+            Submit
+          </button>
         </form>
         <div>
-          {user?.comments.map((comment:any) => (
-            <div key={comment._id}>
-              <img src={comment.avatar} alt="img"  className="w-45 h-45 rounded-full border"/>
-              <h1 className="text-gray-900 text-sm">{comment.name}</h1>
-              <h1 className="text-gray-600 text-sm">{comment.text}</h1>
-              <h1 className="text-gray-500 text-sm">Date: {comment.date}</h1>
+          {user?.comments.map((comment: any) => (
+            <div key={comment._id} className="border-b py-3">
+              <div className="flex items-center">
+                <img
+                  src={comment.avatar}
+                  alt="img"
+                  className="w-12 h-12 rounded-full border"
+                />
+                <div className="ml-3">
+                  <h1 className="text-gray-900 text-sm font-semibold">{comment.name}</h1>
+                  <p className="text-gray-600 text-sm">{comment.text}</p>
+                  <p className="text-gray-500 text-xs">Date: {comment.date}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -76,7 +98,4 @@ function userByID() {
   );
 }
 
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhNDlmODI2OThkNDQwMDU2ODA4YTMyIn0sImlhdCI6MTc0MDI1MDE0MCwiZXhwIjoxNzQwNjgyMTQwfQ.RaYx_mE4cBrJqFp17OXXrWXGUsY5KtMlCwrecsUAjyA
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhNDlmODI2OThkNDQwMDU2ODA4YTMyIn0sImlhdCI6MTc0MDI1MDE0MCwiZXhwIjoxNzQwNjgyMTQwfQ.RaYx_mE4cBrJqFp17OXXrWXGUsY5KtMlCwrecsUAjyA
-
-export default userByID;
+export default UserByID;

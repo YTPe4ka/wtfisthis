@@ -3,7 +3,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Router from 'next/router';
 import React, { useState, useEffect } from 'react';
+import useFetch from './useFetch';
 function useEdit<T>(url: string) {
+  const {statusofuser,SetStatusOfUser } = useFetch('profile/me');
   const [data, setData] = useState<T | null>(null); // this is to set data in edit profile
   const [error, setError] = useState<string>(''); // this is to set any error
   const [loading, setLoading] = useState<boolean>(false); // this is to set any loading
@@ -41,6 +43,7 @@ function useEdit<T>(url: string) {
       if (res.status === 200) { // there if status 200 we set data just idk its not very need thing becs we any way push user to dashboard
         setData(res.data);
         console.log(res.status);
+        SetStatusOfUser(true)
         router.push('/dashboard'); // in perfect style here there must be toastify to show user that everything is perfect
       }
       console.log(res);

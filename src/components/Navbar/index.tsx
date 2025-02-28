@@ -4,15 +4,19 @@ import React, { useState } from "react";
 import "./style.css";
 import Link from "next/link";
 import { usePathname,useRouter} from "next/navigation";
+import useFetch from "@/hooks/useFetch";
+import { User } from "@/interface/User";
 
 function Navbar() {
   const token = localStorage.getItem('token');
   const pathname = usePathname();
+  const { data, loading, error, statusofuser,SetStatusOfUser } = useFetch<User>('profile/me');
   const router = useRouter();
 
   const logOut = () => {
     localStorage.removeItem("token");
     router.push("/");
+    SetStatusOfUser(true);
   };
 
   return (

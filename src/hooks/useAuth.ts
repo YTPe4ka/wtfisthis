@@ -11,32 +11,9 @@ function useAuth() {
     const [loading, setLoading] = useState<boolean>(false) // this to set loading 
     const router = useRouter()//this is to push user when status is perfect
 
+// "67a49f82698d440056808a32"
 
-    ///////////////////////////////////////
-    async function getMe() {
-        try {
-            // setLoading(true)
-            setError("")
-            let res = await axios.get( baseUrl + "auth/me",{
-                headers:{
-                    'x-auth-token': `${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json',
 
-                }
-            })
-            setUserinLogin(res.data)
-        } catch (error:any) {
-            setError(error.message)
-        }finally{
-        setLoading(false)
-        }
-       
-    }
-    ///////////////////////////////////////
-
-    useEffect(  () => {
-        getMe();
-    },[])
 
     ///////////////////////////////////////
 

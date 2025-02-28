@@ -4,35 +4,47 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 function Login() {
-    const {login,logOut,user,error,loading} = useAuth() 
-    const [email,setEmail] = useState<string>("")
-    const [password,setPassword] = useState<string>("")
-      let router = useRouter();
-      if (localStorage.getItem("token")) {
-        router.push("/dashboard")
-      }
-    const onSubmit = async (e:React.FormEvent) => {
-        e.preventDefault();
-     await login(email,password)
-    }
+    const {login, logOut, error, loading} = useAuth() 
+    const [email, setEmail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+    let router = useRouter();
     
-    // if (loading) {
-    //     return <h1>gay</h1>
-    // }
-    if (error) {
-        return <h1>{error}</h1>
+    if (localStorage.getItem("token")) {
+        router.push("/dashboard")
     }
 
-  return (
-    <div>
+    const onSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        await login(email, password)
+    }
 
-        <form action="" onSubmit={onSubmit}>
-            <input onChange={(e) => setEmail(e.target.value)}   type="text" placeholder='Email Address'/>
-            <input onChange={(e) => setPassword(e.target.value)}   type="password" placeholder='Password'/>
-            <button>{loading?"Loading...":"Submit"}</button>
-        </form>
-    </div>
-  )
+    return (
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+            <div className="bg-white shadow-md p-6 rounded-lg w-96">
+                <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
+
+                <form onSubmit={onSubmit} className="space-y-4">
+                    <input 
+                        onChange={(e) => setEmail(e.target.value)}   
+                        type="text" 
+                        placeholder="Email Address" 
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <input 
+                        onChange={(e) => setPassword(e.target.value)}   
+                        type="password" 
+                        placeholder="Password" 
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <button 
+                        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+                    >
+                        {loading ? "Loading..." : "Submit"}
+                    </button>
+                </form>
+            </div>
+        </div>
+    )
 }
 
 export default Login

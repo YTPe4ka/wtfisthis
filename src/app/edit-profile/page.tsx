@@ -20,7 +20,7 @@ function EditProfile() {
   const [githubusername, setGithubusername] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [useless, setUseless] = useState<string>('');
-  const { data, error,loading:loadings } = useFetch<User>('profile/me');
+  const { data, error,loading:loadings,statusofuser,SetStatusOfUser } = useFetch<User>('profile/me');
   const { EditMyAss, data: datas, loading } = useEdit('profile');
   console.log(loadings,"Sdssdssssssss");
  useEffect(() => {

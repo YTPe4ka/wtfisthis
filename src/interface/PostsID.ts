@@ -11,6 +11,7 @@ export interface Posts{_id: number | string;
     comments:string;
     text:string 
     skills:string;
+    length:number;
     user:{
         name:string
     }

@@ -10,7 +10,7 @@ function page() {
   const { loading, error, data, Profiles, user, posts } =
     useFetch<Posts | null>('posts');
 
-  // const { DeleteMyPost } = useFunction<Posts | null>(`${post_id}`);
+  const { DeleteMyPost } = useFunction<Posts | null>("posts/");
   const {
     data: datas,
     loading: wtfisthis,
@@ -97,7 +97,7 @@ function page() {
                     {datas && datas.user._id === posts.user ? (
                       <button
                         className="w-[140px] py-2 bg-[#0f3352] text-white rounded-md ml-4"
-                        // onClick={() => DeleteMyPost(posts._id)}
+                        onClick={() => DeleteMyPost(posts._id)}
                       >
                         Delete
                       </button>

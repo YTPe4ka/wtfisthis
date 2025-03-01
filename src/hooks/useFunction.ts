@@ -77,20 +77,24 @@ function useFunction<T>(url: string) {
     }
   }
   //////////////////////////////////////////////////////////////////////////// there we export all functions and datas
-  async function DeleteMyPost(post_id: string){
+  async function DeleteMyPost(post_id:string){
+  console.log(post_id,"lllllllllllllllllllllllllllllllllllllllllll");
+  
     try {
       setError('');
       setLoading(true);
-      let res = await axios.delete(baseUrl + "posts/" + {post_id} , {
+      let res = await axios.delete(baseUrl + url + post_id , {
         headers: {
           'x-auth-token': `${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
         },
       });
       console.log(res.status);
-      console.log(res);
+      console.log(res, "sdfghjhgfdfghjhgfdsdfghjk ");
     } catch (error: any) {
       setError(error.message);
+      console.log(error);
+      
     } finally {
       setLoading(false);
     }

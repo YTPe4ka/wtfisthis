@@ -15,7 +15,7 @@ function UserByID() {
     useFetch<Posts>(`posts/${posts_id}`);
   const { data: datas, loading: wtfisthis, error: uzbeksila, statusofuser } =
     useFetch<User>('profile/me');
-
+  const { DeleteMyPost } = useFunction<Posts | null>(`posts/comment/${posts_id}/`);
   const { Like } = useFunction<Posts>(`posts/like/${posts_id}`);
   const { UnLike } = useFunction<Posts>(`posts/unlike/${posts_id}`);
   const { PostComment } = useFunction<Posts>(`posts/comment/${posts_id}`);
@@ -88,6 +88,17 @@ function UserByID() {
                   <h1 className="text-gray-900 text-sm font-semibold">{comment.name}</h1>
                   <p className="text-gray-600 text-sm">{comment.text}</p>
                   <p className="text-gray-500 text-xs">Date: {comment.date}</p>
+                  {datas && datas.user._id === comment.user ? (
+                      <button
+                        className="w-[140px] py-2 bg-[#0f3352] text-white rounded-md ml-4"
+                        onClick={() => DeleteMyPost(comment._id)}
+                      >
+                        Delete
+                      </button>
+
+                    ) : (
+                      ''
+                    )}
                 </div>
               </div>
             </div>

@@ -33,6 +33,8 @@ function Dashboard() {
             >
               Edit Profile
             </button>
+            <button className='mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition' onClick={() => router.push('/add-experience') }>Add Experience</button>
+            <button className='mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition' onClick={() => router.push('/add-education') }>Add Education</button>
             <button className='mt-4 w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition' onClick={() => DeleteMyAccount()}>Delete My Account</button>
           </>
         ) : (

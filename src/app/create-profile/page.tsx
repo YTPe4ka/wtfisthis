@@ -1,42 +1,23 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import useFetch from '@/hooks/useFetch';
-import { User } from '@/interface/User';
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
-import Login from '../login/page';
+import React, { useState } from 'react';
 import useEdit from '@/hooks/useEdit';
 
 function CreateProfile() {
-  // const router = useRouter();
-  const { me } = useParams();
-  const [AboutMe, setAboutMe] = useState<null>(null);
-  const [social, setSocial] = useState<null>(null);
-  const [skills, setSkills] = useState<string >("");
-  const [status, setStatus] = useState<string>('');
-  const [bio, setBio] = useState<string>('');
-  const [company, setCompany] = useState<string>('');
-  const [website, setWebsite] = useState<string>(''); //website
-  const [githubusername, setGithubusername] = useState<string>('');
-  const [location, setLocation] = useState<string>('');
-  const [useless, setUseless] = useState<string>('');
-  // const { data, error,loading:loadings } = useFetch<User>('profile/me');
-  const { EditMyAss, data: datas, loading } = useEdit('profile');
-  // console.log(loadings,"Sdssdssssssss");
-//  useEffect(() => {
-//   console.log(data,"ddddddddddddddddddddddddddddddddddddddddddddd  s");
-  
-//   // if (data) {
-//     setCompany(data?.company || '');
-//     setBio(data?.bio || '');
-//     setStatus(data?.status || '');
-//     setSkills(data?.skills || '');
-//     setWebsite(data?.website || '');
-//     setGithubusername(data?.githubusername || '');
-//     setLocation(data?.location || '');
-//   // }
-// }, [loadings]);
-  // console.log(datas);
+  const { EditMyAss } = useEdit('profile');
+  const [status, setStatus] = useState('');
+  const [company, setCompany] = useState('');
+  const [website, setWebsite] = useState('');
+  const [location, setLocation] = useState('');
+  const [skills, setSkills] = useState('');
+  const [githubusername, setGithubusername] = useState('');
+  const [bio, setBio] = useState('');
+  const [socials, setSocials] = useState({
+    twitter: '',
+    facebook: '',
+    youtube: '',
+    linkedin: '',
+    instagram: '',
+  });
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,113 +25,84 @@ function CreateProfile() {
   };
 
   return (
-    <div className="flex flex-col gap-3 items-center">
-      <h1 className="text-4xl">Create Your Profile</h1>
-      <h2 className="text-2xl">Add some Information to your profile</h2>
-      <p className="text-sm">* = required field</p>
-      <form
-        action=""
-        onSubmit={onSubmit}
-        className="flex flex-col gap-3 items-center"
-      >
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+      <h1 className="text-4xl font-bold text-blue-600 mb-4">Create Your Profile</h1>
+      <p className="text-gray-600">Add some Information to your profile</p>
+      <p className="text-sm text-gray-500 mb-6">* = required field</p>
+      
+      <form onSubmit={onSubmit} className="bg-white shadow-md rounded-lg p-6 w-full max-w-lg">
+        <label className="block text-gray-700">* Select Professional Status</label>
         <select
-          id="person"
-          name="person"
+          className="w-full p-2 border rounded-md mt-1"
           onChange={(e) => setStatus(e.target.value)}
         >
-          <option value="* Select Professional Status">
-            * Select Professional Status
-          </option>
+          <option value="">Select Status</option>
           <option value="Developer">Developer</option>
           <option value="Junior Developer">Junior Developer</option>
           <option value="Senior Developer">Senior Developer</option>
-          <option value="manager">manager</option>
-          <option value="Student or Learning">Student or Learning</option>
-          <option value="Instructur or Teacher">Instructur or Teacher</option>
+          <option value="Manager">Manager</option>
+          <option value="Student">Student</option>
+          <option value="Teacher">Teacher</option>
           <option value="Intern">Intern</option>
-          <option value="other">other</option>
+          <option value="Other">Other</option>
         </select>
-        <p className="opacity-50">
-          Give us an idea of where you are at in your career
-        </p>
-        <input
-          type="text"
-          placeholder="Company"
-          name="company"
-          onChange={(e) => setCompany(e.target.value)}
-        />
-        <p className="opacity-50">
-          Could be your own company or one you work for
-        </p>
-        <input
-          type="text "
-          placeholder="Website"
-          name="website"
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-        <p className="opacity-50">Could be your own or a company website</p>
-        <input
-          type="text "
-          placeholder="Location"
-          name="location"
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <p className="opacity-50">
-          City & state suggested {`(eg. Boston, MA)`}
-        </p>
-        <input
-          type="text "
-          placeholder="*Skills"
-          name="skills"
-          onChange={(e) => setSkills(e.target.value)}
-        />
-        <p className="opacity-50">
-          Please use comma separated values {`(eg. HTML,CSS,JavaScript,PHP)`}
-        </p>
-        <input
-          type="text "
-          placeholder="GitHub Username"
-          name="githubusername"
-          onChange={(e) => setGithubusername(e.target.value)}
-        />
-        <p className="opacity-50">
-          If you want your latest repos and a Github link, include your username
-        </p>
-        <textarea
-          placeholder="Write A short bio about ur self"
-          name="bio"
-          value={bio}
-          onChange={(e: any) => setBio(e.target.value)}
-        ></textarea>
-        <p className="opacity-50">Tell us a little about yourself</p>
-        <h1>Add about ur self</h1>
-        <input
-          type="text"
-          placeholder="Twitter URl"
-          onChange={(e) => setUseless(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Facebook URl"
-          onChange={(e) => setUseless(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="YouTube URl"
-          onChange={(e) => setUseless(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Linkedin URl"
-          onChange={(e) => setUseless(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Instagram URl"
-          onChange={(e) => setUseless(e.target.value)}
-        />
 
-        <button type="submit">submit</button>
+        <div className="mt-4">
+          <input
+            type="text"
+            placeholder="Company"
+            className="w-full p-2 border rounded-md mt-1"
+            onChange={(e) => setCompany(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Website"
+            className="w-full p-2 border rounded-md mt-3"
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Location"
+            className="w-full p-2 border rounded-md mt-3"
+            onChange={(e) => setLocation(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="*Skills (comma separated)"
+            className="w-full p-2 border rounded-md mt-3"
+            onChange={(e) => setSkills(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="GitHub Username"
+            className="w-full p-2 border rounded-md mt-3"
+            onChange={(e) => setGithubusername(e.target.value)}
+          />
+        </div>
+
+        <textarea
+          placeholder="Write a short bio about yourself"
+          className="w-full p-2 border rounded-md mt-3 h-24"
+          onChange={(e) => setBio(e.target.value)}
+        ></textarea>
+
+        <h2 className="text-lg font-semibold mt-4">Social Links</h2>
+        {Object.keys(socials).map((key) => (
+          <input
+            key={key}
+            type="text"
+            placeholder={`${key.charAt(0).toUpperCase() + key.slice(1)} URL`}
+            className="w-full p-2 border rounded-md mt-2"
+            onChange={(e) => setSocials({ ...socials, [key]: e.target.value })}
+          />
+        ))}
+
+        <button
+          type="submit"
+          className="w-full mt-6 p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

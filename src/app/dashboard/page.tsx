@@ -1,5 +1,6 @@
 'use client';
 import useFetch from '@/hooks/useFetch';
+import useFunction from '@/hooks/useFunction';
 import { User } from '@/interface/User';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -8,6 +9,7 @@ function Dashboard() {
   const { data, loading, error, statusofuser } = useFetch<User>('profile/me');
   console.log(data);
   let router = useRouter();
+  const {DeleteMyAccount} = useFunction<User>('profile')
 
   if (!localStorage.getItem('token')) {
     router.push('/login');
@@ -31,6 +33,7 @@ function Dashboard() {
             >
               Edit Profile
             </button>
+            <button className='mt-4 w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition' onClick={() => DeleteMyAccount()}>Delete My Account</button>
           </>
         ) : (
           <>

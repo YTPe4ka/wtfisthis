@@ -20,10 +20,11 @@ function UserByID() {
   return (
     <div className="max-w-xl mx-auto p-6">
       <div className="bg-white shadow-md p-6 rounded-lg">
-        <h1 className="text-blue-600 text-2xl font-bold mb-4">Dashboard</h1>
+        <h1 className="text-blue-600 text-2xl font-bold mb-4">About User</h1>
         <h1 className="text-gray-800 text-xl font-semibold">
-          Welcome, {data?.user.name}
+          User, {data?.user.name}
         </h1>
+        <img className="rounded-lg" src={data?.user?.avatar} alt="" />
         <p className="text-gray-600">
           <span className="font-bold">Developer at:</span> {data?.company ?? "N/A"}
         </p>

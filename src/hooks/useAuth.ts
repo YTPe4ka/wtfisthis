@@ -11,18 +11,17 @@ function useAuth() {
     const [loading, setLoading] = useState<boolean>(false) // this to set loading 
     const router = useRouter()//this is to push user when status is perfect
 
-// "67a49f82698d440056808a32"
 
 
 
     ///////////////////////////////////////
 
-    async function login(email:string, password:string){
+    async function login(phone:string, password:string){
 
         try {
-            let res = await axios.post(baseUrl + "auth",{
-                email,
-                password
+            let res = await axios.post(baseUrl + "auth/login/",{
+                phone,
+                password    
             },{
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,25 +39,27 @@ function useAuth() {
         }
     }
     ///////////////////////////////////////
-    async function Register(name:string,email:string, password:string,){
+    async function Register( password:string,name:string, phone:string,){
         try {
-            let res = await axios.post(baseUrl + "users",{
+            let res = await axios.post(baseUrl + "auth/register-library/",{
+                password,
                 name,
-                email,
-                password
+                phone,
             },{
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
             console.log(res.status);
-            
+            console.log('Response data:', res.data);
             if (res.status === 200) {
                 router.push("/dashboard")
                 localStorage.setItem ("token",res.data.token)
             }
             console.log(res);
         } catch (error:any) {
+                console.log(error ,"moya mama");
+                
             setError(error.message)
         }finally{
             setLoading(false)
@@ -67,7 +68,7 @@ function useAuth() {
     ///////////////////////////////////////
 
     function logOut(){
-        // logOut function realized in 
+        // logOut function realized in navbar
     }
 
 

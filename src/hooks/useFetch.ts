@@ -55,8 +55,6 @@ function useFetch<T>(url: string) {
   useEffect(() => {
     getMe();
     // GetProfiles();
-    // userGet();
-    // postGet();
   }, [url]);
 
   //////////////////////////////////////////////////////////////////////////// this is to getting profiles in developers
@@ -79,113 +77,8 @@ function useFetch<T>(url: string) {
       setLoading(false);
     }
   }
-
-  ////////////////////////////////////////////////////////////////////////////  thi is to getting profiles in developers
-
-  // async function userGet() {
-  //   try {
-  //     setError('');
-  //     setLoading(true);
-  //     let res = await axios.get(baseUrl + url, {
-  //       headers: {
-  //         'x-auth-token': `${localStorage.getItem('token')}`,
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     setUser(res.data);
-  //   } catch (error: any) {
-  //     setError(error.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-  //////////////////////////////////////////////////////////////////////////// this to getting profiles in
-  // async function postGet() {
-  //   try {
-  //     setError('');
-  //     setLoading(true);
-  //     let res = await axios.get(baseUrl + url, {
-  //       headers: {
-  //         'x-auth-token': `${localStorage.getItem('token')}`,
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     setPosts(res.data);
-  //   } catch (error: any) {
-  //     setError(error.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
-  //////////////////////////////////////////////////////////////////////////// this is problem function like in posts
-
-  async function Like() {
-    try {
-      setError('');
-      setLoading(true);
-      let res = await axios.put(baseUrl + url,undefined, {
-        headers: {
-          'x-auth-token': `${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log(res.status);
-      console.log(res);
-      setStatusofLike(res);
-    } catch (error: any) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-  //////////////////////////////////////////////////////////////////////////// this is problem function unlike in posts
-
-  async function UnLike() {
-    try {
-      setError('');
-      setLoading(true);
-      let res = await axios.put(baseUrl + url,undefined, {
-        headers: {
-          'x-auth-token': `${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log(res.status);
-      console.log(res);
-      setStatusofLike(res);
-    } catch (error: any) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-  //////////////////////////////////////////////////////////////////////////// this is problem function unlike in posts
-  
-  async function PostComment(text: string){
-    try {
-      setError('');
-      setLoading(true);
-      let res = await axios.post(baseUrl + url,
-        {
-          text
-        }
-        , {
-        headers: {
-          'x-auth-token': `${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log(res.status);
-      console.log(res);
-    } catch (error: any) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
   //////////////////////////////////////////////////////////////////////////// there we export all functions and datas
-  return { loading, error, data, Profiles, user, posts, Like, statusofLike,UnLike,PostComment,statusofuser,SetStatusOfUser};
+  return { loading, error, data, Profiles, user, posts,  statusofLike,statusofuser,SetStatusOfUser};
 }
 
 export default useFetch;

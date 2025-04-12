@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 
 function Login() {
     const {login, logOut, error, loading} = useAuth() 
-    const [email, setEmail] = useState<string>("")
+    const [phone, setPhone] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     let router = useRouter();
     
@@ -15,7 +15,7 @@ function Login() {
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await login(email, password)
+        await login(phone, password)
     }
 
     return (
@@ -25,9 +25,9 @@ function Login() {
 
                 <form onSubmit={onSubmit} className="space-y-4">
                     <input 
-                        onChange={(e) => setEmail(e.target.value)}   
+                        onChange={(e) => setPhone(e.target.value)}   
                         type="text" 
-                        placeholder="Email Address" 
+                        placeholder="Phone Number" 
                         className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <input 

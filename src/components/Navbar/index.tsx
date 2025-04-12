@@ -22,7 +22,7 @@ function Navbar() {
   return (
     <div className="flex justify-between p-4 bg-slate-900 text-gray-100">
       <Link href={"/"} className="text-gray-100">
-        DevConnector
+        Dashboard
       </Link>
       <div className="flex gap-3">
         <Link
@@ -50,9 +50,9 @@ function Navbar() {
           <div className="flex gap-3">
               <Link
                 className={`${pathname === "/post" ? "active" : ""}`}
-                href={"/post"}
+                href={"/books"}
               >
-                Posts
+                books
               </Link>
             <Link
               className={`${pathname === "/dashboard" ? "active" : ""}`}

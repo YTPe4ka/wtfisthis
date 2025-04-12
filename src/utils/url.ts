@@ -1,1 +1,1 @@
-export const baseUrl: string ="https://nt-devconnector.onrender.com/api/"
+export const baseUrl: string ="s-libraries.uz/api/v1"

@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 function Login() {
     const {login, logOut,  error, loading, Register} = useAuth() 
     const [name, setName] = useState<string>("")
-    const [email, setEmail] = useState<string>("")
+    const [phone, setPhone] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     let router = useRouter();
     
@@ -16,7 +16,7 @@ function Login() {
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await Register(name, email, password)
+        await Register(password,name,phone, )
     }
     
     if (error) {
@@ -36,9 +36,9 @@ function Login() {
                         className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <input 
-                        onChange={(e) => setEmail(e.target.value)}   
+                        onChange={(e) => setPhone(e.target.value)}   
                         type="text" 
-                        placeholder="Email Address" 
+                        placeholder="set ur Phone number" 
                         className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <input 

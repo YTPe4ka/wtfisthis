@@ -20,66 +20,65 @@ function BookDetail() {
     router.push('/login');
   }
 
-  if (loading) return <p className="text-center mt-10 text-gray-600">Loading...</p>;
-  if (error || !data) return <p className="text-center mt-10 text-red-500">Book not found.</p>;
+  if (loading) return <p className="text-center mt-10 text-rose-400">Loading...</p>;
+  if (error || !data) return <p className="text-center mt-10 text-red-400">Book not found.</p>;
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    PostBook(name,author,publisher);
+    PostBook(name, author, publisher);
   };
+
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-6">
-      <div className="bg-white shadow-md p-6 rounded-lg w-full max-w-md text-center">
-        <h1 className="text-2xl font-bold text-blue-600 mb-2">{data.name}</h1>
-        <p className="text-gray-800 text-lg mb-1">✍️ Author: {data.author}</p>
-        <p className="text-gray-700 mb-1">🏢 Publisher: {data.publisher}</p>
-        <p className="text-gray-700 mb-1">📦 Quantity In Library: {data.quantity_in_library}</p>
+    <div className="flex flex-col items-center min-h-screen bg-rose-50 p-6">
+      <div className="bg-white border border-rose-100 shadow-xl p-8 rounded-3xl w-full max-w-md text-center transition-all duration-300">
+        <h1 className="text-2xl font-bold text-rose-500 mb-3">{data.name}</h1>
+        <p className="text-rose-400 text-lg mb-1">✍️ Author: {data.author}</p>
+        <p className="text-rose-400 mb-1">🏢 Publisher: {data.publisher}</p>
+        <p className="text-rose-400 mb-1">📦 Quantity In Library: {data.quantity_in_library}</p>
 
-        <button
-          onClick={() => router.back()}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Go Back
-        </button>
+        <div className="mt-6 flex flex-wrap justify-center gap-4">
+          <button
+            onClick={() => router.back()}
+            className="px-5 py-2.5 bg-rose-400 text-white rounded-xl hover:bg-rose-500 transition-all duration-300 shadow hover:shadow-md"
+          >
+            Go Back
+          </button>
 
-        <button
-          onClick={() => setWant(!want)}
-          className="mt-4 ml-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-        >
-          Want some changes?
-        </button>
+          <button
+            onClick={() => setWant(!want)}
+            className="px-5 py-2.5 bg-amber-300 text-rose-800 rounded-xl hover:bg-amber-400 transition-all duration-300 shadow hover:shadow-md"
+          >
+            Want some changes?
+          </button>
+        </div>
 
         {want && (
-          <form onSubmit={onSubmit} className="mt-6 flex flex-col items-start gap-4">
+          <form onSubmit={onSubmit} className="mt-8 flex flex-col items-start gap-4 text-left">
             <input
               type="text"
               placeholder="Name"
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-3 border border-rose-200 rounded-xl placeholder:text-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 transition"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <input
               type="text"
               placeholder="Author"
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-3 border border-rose-200 rounded-xl placeholder:text-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 transition"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
             />
             <input
               type="text"
               placeholder="Publisher"
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-3 border border-rose-200 rounded-xl placeholder:text-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 transition"
               value={publisher}
               onChange={(e) => setPublisher(e.target.value)}
             />
 
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            //   onClick={(e) => {
-            //     e.preventDefault();
-            //     console.log({ name, author, publisher });
-            //     // Тут ты можешь отправить PATCH/PUT запрос
-            //   }}
+              className="self-center mt-2 px-6 py-2.5 bg-rose-500 text-white rounded-xl hover:bg-rose-600 transition-all duration-300 shadow hover:shadow-lg"
             >
               Submit
             </button>

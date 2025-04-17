@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import "./style.css";
 import Link from "next/link";
@@ -22,15 +21,9 @@ function Navbar() {
   return (
     <div className="flex justify-between p-4 bg-slate-900 text-gray-100">
       <Link href={"/"} className="text-gray-100">
-        Dashboard
+        Library Admin
       </Link>
       <div className="flex gap-3">
-        <Link
-          className={`${pathname === "/developers" ? "active" : ""}`}
-          href={"/developers"}
-        >
-          developers
-        </Link>
         {!token ? (
           <div className="flex gap-3">
             <Link
@@ -56,9 +49,9 @@ function Navbar() {
               </Link>
             <Link
               className={`${pathname === "/dashboard" ? "active" : ""}`}
-              href={"/dashboard"}
+              href={"/libraries"}
             >
-              Dashboard
+              Libraries
             </Link>
             <button
               onClick={logOut}

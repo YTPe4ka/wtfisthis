@@ -1,3 +1,5 @@
 .wrap{
     background-color: red;
+    position: fixed;
+    top:0;
 }

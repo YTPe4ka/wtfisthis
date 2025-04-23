@@ -38,14 +38,14 @@ export interface Book {
   
   
   export interface User {
-    id: number;
-    name: string;
-    address: string;
-    user: number;
-    can_rent_books: boolean;
-    total_books: number;
+    id: number | null;
+    name: string | null;
+    address: string | null; 
+    user: number | null;
+    can_rent_books: boolean | null;
+    total_books: number | null;
   
-    library: Library;
-    books: Book[];
+    library: Library | null;
+    books: Book[] | null;
   }
   

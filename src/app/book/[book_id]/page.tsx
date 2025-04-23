@@ -14,7 +14,7 @@ function BookDetail() {
   const [name, setName] = useState('');
   const [author, setAuthor] = useState('');
   const [publisher, setPublisher] = useState('');
-  const { PostBook } = useFunction<Book | null>(`books/book/${book_id}`);
+  const { EditBook } = useFunction<Book | null>(`books/book/${book_id}/`);
 
   if (typeof window !== 'undefined' && !localStorage.getItem('token')) {
     router.push('/login');
@@ -25,7 +25,7 @@ function BookDetail() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    PostBook(name, author, publisher);
+    EditBook(name, author, publisher);
   };
 
   return (

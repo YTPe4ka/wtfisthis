@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 function useAuth() {
-    const [userinlogin, setUserinLogin] = useState<User | null>(null) // this is to set user
     const [error, setError] = useState<string>("")// this to set error
     const [loading, setLoading] = useState<boolean>(false) // this to set loading 
     const router = useRouter()//this is to push user when status is perfect
@@ -108,7 +107,7 @@ function useAuth() {
 
 
 
-  return {login,logOut,userinlogin,error,loading,Register};
+  return {login,logOut,error,loading,Register};
 }
 
 export default useAuth

@@ -3,11 +3,11 @@ import useFetch from '@/hooks/useFetch';
 import useFunction from '@/hooks/useFunction';
 import { Book } from '@/interface/books';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { User } from '@/interface/User';
 function BooksDashboard() {
   const { data } = useFetch<Book[] | null>('books/books');
-  const { data:datas,loading } = useFetch<User | null>('auth/profile/');
+  const { data:datas } = useFetch<User>('auth/profile/');
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
   const [search, setSearch] = useState('');

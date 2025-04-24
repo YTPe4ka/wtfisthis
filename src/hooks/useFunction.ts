@@ -1,7 +1,6 @@
 import { baseUrl } from '@/utils/url';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import  { useState} from 'react';
 
 function useFunction<T>(url: string) {
   const [data, setData] = useState<T | null>(null); // this for setting the data data

@@ -1,9 +1,8 @@
 "use client";
-import { User } from '@/interface/User';
 import { baseUrl } from '@/utils/url';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import  {  useState } from 'react'
 
 function useAuth() {
     const [error, setError] = useState<string>("")// this to set error
@@ -14,32 +13,6 @@ function useAuth() {
 
 
     ///////////////////////////////////////
-
-    // async function login(phone:string, password:string){
-
-    //     try {
-    //         let res = await axios.post(baseUrl + "auth/login/",{
-    //             phone,
-    //             password    
-    //         },{
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         })
-    //         if (res.status === 200) {
-    //             router.push("/dashboard")
-    //             localStorage.setItem ("token",res.data.access)
-    //         }
-    //         if(res.status === 401){
-    //         }
-    //         console.log(res);
-    //     } catch (error:any) {
-    //         alert('Accaunt is not verified')
-    //         setError(error.message)
-    //     }finally{
-    //         setLoading(false)
-    //     }
-    // }
     async function login(phone: string, password: string) {
         try {
           setLoading(true);

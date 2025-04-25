@@ -5,7 +5,6 @@ function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null); // this for setting the data data
   const [error, setError] = useState<string>(''); //this is for error from something
   const [loading, setLoading] = useState<boolean>(false); // this is for loading when data comming
-  const [user, setUser] = useState<T | null>(null); // this for setting the user like data in dashboard
   // const [canrentabook , setCanRentaBook] use<boolean>(false)
   const [statusofuser,SetStatusOfUser] = useState<boolean>(false)
   const [can_rent_books,SetCanRentaBook] = useState<boolean>(false)
@@ -55,7 +54,7 @@ function useFetch<T>(url: string) {
 
   //////////////////////////////////////////////////////////////////////////// there we export all functions and datas
   
-  return { loading, error,  data, user,statusofuser,can_rent_books,SetStatusOfUser,location,length};
+  return { loading, error,  data, statusofuser,can_rent_books,SetStatusOfUser,location,length};
 }
 
 export default useFetch;

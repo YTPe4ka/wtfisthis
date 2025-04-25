@@ -116,7 +116,7 @@ function BooksDashboard() {
                 >
                   Read More
                 </button>
-                {book.library === datas.id && (
+                {datas&&book.library===datas.id&&  (
                   <button
                     onClick={() => DeleteBook(book.id)}
                     className="px-4 py-2 bg-red-400 text-white rounded-lg hover:bg-red-500 transition-all shadow"

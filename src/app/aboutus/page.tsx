@@ -6,7 +6,7 @@ import React from 'react';
 
 function AboutUs() {
   const { data: books } = useFetch<Book[] | null>('books/books');
-  const { data: libraries } = useFetch<User | null>('libraries/libraries'); // путь подстрой под себя
+  const { data: libraries } = useFetch<User | null>('libraries/libraries');
 
   const totalBooks = Array.isArray(books) ? books.length : 0;
   const totalLibraries = Array.isArray(libraries) ? libraries.length : 0;

@@ -9,13 +9,11 @@ import { User } from "@/interface/User";
 function Navbar() {
   const token = localStorage.getItem('token');
   const pathname = usePathname();
-  const {  SetStatusOfUser } = useFetch<User>('auth/profile');
   const router = useRouter();
 
   const logOut = () => {
     localStorage.removeItem("token");
     router.push("/");
-    SetStatusOfUser(true);
   };
 
   return (
